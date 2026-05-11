@@ -1,0 +1,43 @@
+data:
+  mode: "1h"
+  csv_path: "df_C_H_merged_NMR_unique.csv"
+  processed_dir: "processed/nmr_1h"
+  smiles_col: "canon_smiles"
+  nmr_col: "NMR_processed_1H"
+  max_peaks: 100
+  max_smiles_len: 600
+  val_frac: 0.10
+  test_frac: 0.10
+  min_token_freq: 2
+  min_split_freq: 50
+
+model:
+  d_model: 512
+  nhead: 8
+  encoder_layers: 4
+  decoder_layers: 4
+  d_ff: 1024
+  dropout: 0.10
+
+training:
+  seed: 42
+  epochs: 50
+  batch_size: 128
+  gradient_accumulation_steps: 1
+  num_workers: 4
+  learning_rate: 1.0e-4
+  weight_decay: 0.01
+  warmup_steps: 4000
+  max_grad_norm: 1.0
+  val_every_n_epochs: 5
+  checkpoint_dir: "checkpoints/nmr_1h"
+
+  loss_weights:
+    ppm: 5.0
+    split: 1.0
+    j: 1.0
+    integ: 0.5
+    width: 0.5
+    exist: 2.0
+    no_object_weight: 0.1
+    label_smoothing: 0.1
