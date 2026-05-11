@@ -1,17 +1,17 @@
 # PRISM: Bidirectional NMR–SMILES Translation
 
-**P**eak-aware **R**epresentation for **I**nferring **S**tructure from **M**olecular spectra.
+**P**eak **R**esolved **I**ntegrative **S**pectral **M**odel.
 
 PRISM is a paired pair of transformer models for the two ends of small-molecule NMR analysis:
 
 | Direction          | Module      | Task                                                                    |
 | ------------------ | ----------- | ----------------------------------------------------------------------- |
 | **Forward**        | `mol2spec`  | Given a SMILES string, predict its `¹H` and/or `¹³C` NMR peak list.     |
-| **Inverse**        | `spect2mol` | Given `¹H` and/or `¹³C` NMR peak lists, decode the SMILES string.       |
+| **Inverse**        | `spect2mol` | Given `¹H` and/or `¹³C` NMR peak lists and/or `Molecular Formula`, decode the SMILES string.       |
 
 Both models are trained on the same in-house curated NMR corpus and share a tokenizer / vocabulary convention, so the predicted spectra from `mol2spec` can be fed directly into `spect2mol` for round-trip validation.
 
-> 📄 *Paper:* **\<title — to appear\>**
+> 📄 *Paper:* **From spectra to structure and back: PRISM, a bidirectional NMR foundation model**
 > 🧪 *Pre-trained checkpoints & training data:* **\<Zenodo DOI — to be added on release\>**
 > 💻 *Code:* this repository
 
@@ -38,7 +38,7 @@ Both networks are encoder–decoder transformers, but the encoder/decoder roles 
 
 **`mol2spec` (forward)** uses a SMILES character-level encoder feeding a *set-prediction* decoder with learnable peak queries (DETR-style). Each query emits a peak with `(δ, splitting, J, integration, line-width, existence)`. Loss is matched to ground-truth peaks via a Hungarian assignment on `δ` and existence probability. The `1H` and `13C` variants are trained independently from the same code base via separate YAML configs.
 
-**`spect2mol` (inverse)** uses a peak-token NMR encoder (per-peak embeddings of `δ`, splitting, `J`, integration, with optional Fourier chemical-shift positional encodings, shift-region tags, molecular-formula and solvent conditioning) and an autoregressive SMILES decoder with greedy or beam-search decoding. Auxiliary heads (spectral reconstruction, formula prediction, peak–atom attention) are switchable through the config.
+**`spect2mol` (inverse)** uses a peak-token NMR encoder (per-peak embeddings of `δ`, splitting, `J`, integration, with optional Fourier chemical-shift positional encodings, shift-region tags, molecular-formula and solvent conditioning) and an autoregressive SMILES decoder with greedy or beam-search decoding.
 
 A complete schematic and ablations are reported in the paper.
 
@@ -68,9 +68,9 @@ PRISM/
     ├── train.py                    # training loop
     ├── inference.py                # single-model + top-K ensemble inference
     ├── test.py                     # held-out evaluation
-    ├── script_preprocess.sh
-    ├── script_train.sh
-    └── script_test.sh
+    ├── script_preprocess.sh        # SLURM script: preprocess 
+    ├── script_train.sh             # SLURM script: train 
+    └── script_test.sh              # SLURM script: test 
 ```
 
 ---
@@ -82,7 +82,7 @@ PRISM is developed against **Python 3.10+** and **PyTorch ≥ 2.1** with CUDA 11
 ### Using `uv` (recommended)
 
 ```bash
-git clone https://github.com/<user>/PRISM.git
+[git clone https://github.com/<user>/PRISM.git](https://github.com/alhqlearn/PRISM.git)
 cd PRISM
 uv venv ~/spp_ahq                       # named to match the SLURM scripts
 source ~/spp_ahq/bin/activate
@@ -271,19 +271,6 @@ python spect2mol/inference.py \
     --output_csv predictions.csv
 ```
 
-### Out-of-bag (single-channel) evaluation
-
-A model trained on both `¹H` *and* `¹³C` can be probed with only one channel via `--eval_spectra`:
-
-```bash
-# 1H only at test time
-python spect2mol/inference.py --checkpoint best.pt --eval_spectra h_only --output_csv h_only.csv
-
-# 13C only at test time
-python spect2mol/inference.py --checkpoint best.pt --eval_spectra c_only --output_csv c_only.csv
-```
-
-The complementary channel is zero-masked in the encoder; this is how the OOB numbers in the paper are produced.
 
 ### Evaluation metrics
 
