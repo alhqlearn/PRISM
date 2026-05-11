@@ -1,0 +1,12 @@
+{
+  "total": 1189478,
+  "train": 951584,
+  "val": 118947,
+  "test": 118947,
+  "n_splits": 87,
+  "n_solvents": 17,
+  "n_atoms": 49,
+  "n_h_regions": 10,
+  "n_c_regions": 11,
+  "vocab_size": 197
+}
