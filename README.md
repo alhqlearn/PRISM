@@ -335,4 +335,6 @@ Source code is released under the **MIT License** (see `LICENSE`). The dataset a
 
 Questions, bug reports and pull requests are very welcome. Please open a GitHub issue, or contact the corresponding author:
 
-**Ariful Hoque** — `<email>` — `<affiliation>`
+**Ajnabiul Hoque** — `ajnabiul.hoque@uni-muenster.de` — `Postdoctoral Researcher
+Glorius Group, Organic Chemistry Institute
+University of Münster`
