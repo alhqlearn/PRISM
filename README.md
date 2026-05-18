@@ -116,19 +116,21 @@ GPU is strongly recommended: training a single mode (`1H` *or* `13C`) takes roug
 
 ## Data & checkpoints
 
-The curated NMR dataset (`df_C_H_merged_NMR_unique.csv`) and all pre-trained checkpoints (`mol2spec/checkpoints/nmr_1h/best.pt`, `mol2spec/checkpoints/nmr_13c/best.pt`, and the `spect2mol/checkpoints/` directory including the top-K ensemble manifest) are released through **https://doi.org/10.5281/zenodo.20271514** under the same DOI as the paper.
+The curated NMR dataset and all pre-trained model checkpoints associated with this study are openly released via Zenodo at **https://doi.org/10.5281/zenodo.20271514**, under the same DOI as the paper.
 
-This collection comprises the complete set of trained model weights and curated NMR datasets used in the study. The molecular structure-to-spectrum prediction models are provided as mol2spec_C13_best.pt (262.65 MB) and mol2spec_H1_best.pt (263.83 MB), corresponding to the ¹³C and ¹H NMR prediction tasks respectively, while the inverse spectrum-to-structure model is supplied as spec2mol_best.pt (649.81 MB). The underlying data is contained in df_C_H_merged_NMR_unique.csv (1.30 GB), a unique-entry table merging ¹H and ¹³C chemical shift assignments, which is partitioned into the standard train.csv (1.04 GB), val.csv, and test.csv (129.56 MB) splits used for model training, validation, and evaluation.
+The deposit comprises the complete set of trained model weights and curated NMR data required to reproduce our results. Two molecular structure-to-spectrum prediction models are provided — `mol2spec_13c_best.pt` (262.65 MB) and `mol2spec_1h_best.pt` (263.83 MB) — corresponding to the ¹³C and ¹H NMR prediction tasks, respectively. The inverse spectrum-to-structure model is supplied as `spec2mol_best.pt` (649.81 MB), released together with the top-K ensemble manifest in the `spec2mol/checkpoints/` directory. The underlying data is contained in `df_C_H_merged_NMR_unique.csv` (1.30 GB), a deduplicated table merging ¹H and ¹³C chemical shift assignments, partitioned into the standard `train.csv` (1.04 GB), `val.csv`, and `test.csv` (129.56 MB) splits used for model training, validation, and evaluation. MD5 checksums are provided alongside each file to verify download integrity.
 
-After downloading, place files as follows:
+### Directory Layout
+
+After downloading, place the files as follows:
 
 ```
 mol2spec/
-    df_C_H_merged_NMR_unique.csv             # training CSV
-    checkpoints/nmr_1h/best.pt
-    checkpoints/nmr_13c/best.pt
-spect2mol/
-    checkpoints/best.pt
+    df_C_H_merged_NMR_unique.csv          # training CSV
+    checkpoints/nmr_1h/best.pt            # rename from mol2spec_1h_best.pt
+    checkpoints/nmr_13c/best.pt           # rename from mol2spec_13c_best.pt
+spec2mol/
+    checkpoints/best.pt                   # rename from spec2mol_best.pt
 ```
 
 Each CSV row contains a canonical SMILES, a `¹H` peak list, and a `¹³C` peak list, both in the bracketed-tuple format described below.
