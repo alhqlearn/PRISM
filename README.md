@@ -280,7 +280,7 @@ python spect2mol/inference.py \
 
 ## Reproducing the paper
 
-A full reproduction (single A40 GPU) involves four jobs:
+A full reproduction involves four jobs:
 
 ```bash
 # Forward direction
@@ -292,7 +292,7 @@ sbatch spect2mol/script_train.sh # ≈ 12 h
 sbatch spect2mol/script_test.sh
 ```
 
-All randomness is controlled by `seed: 42` in each config. The reference numbers in the paper were obtained with `--precision bf16` (or `fp32` on A40 for `mol2spec`), `batch_size=128`, and 50 epochs.
+All randomness is controlled by `seed: 42` in each config. The reference numbers in the paper were obtained with `--precision bf16` (or `fp32` for `mol2spec`), `batch_size=128`, and 50 epochs.
 
 ---
 
@@ -301,26 +301,13 @@ All randomness is controlled by `seed: 42` in each config. The reference numbers
 If PRISM is useful in your work, please cite:
 
 ```bibtex
-@article{hoque2026prism,
-  title   = {PRISM: Bidirectional NMR\textendash SMILES Translation with Set-Prediction
-             and Peak-Conditioned Transformers},
-  author  = {Hoque, A. and <co-authors>},
-  journal = {<journal>},
-  year    = {2026},
-  doi     = {<DOI>}
-}
+
 ```
 
 and the Zenodo deposit for the data + checkpoints:
 
 ```bibtex
-@dataset{hoque2026prism_data,
-  title     = {PRISM dataset and pre-trained checkpoints},
-  author    = {Hoque, A. and <co-authors>},
-  year      = {2026},
-  publisher = {Zenodo},
-  doi       = {<Zenodo DOI>}
-}
+
 ```
 
 ---
