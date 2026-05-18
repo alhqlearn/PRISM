@@ -12,7 +12,7 @@ PRISM is a paired pair of transformer models for the two ends of small-molecule 
 Both models are trained on the same in-house curated NMR corpus and share a tokenizer / vocabulary convention, so the predicted spectra from `mol2spec` can be fed directly into `spect2mol` for round-trip validation.
 
 > 📄 *Paper:* **From spectra to structure and back: PRISM, a bidirectional NMR foundation model**
-> 🧪 *Pre-trained checkpoints & training data:* **\<Zenodo DOI — to be added on release\>**
+> 🧪 *Pre-trained checkpoints & training data:* **https://doi.org/10.5281/zenodo.20271514**
 > 💻 *Code:* this repository
 
 ---
@@ -82,7 +82,7 @@ PRISM is developed against **Python 3.10+** and **PyTorch ≥ 2.1** with CUDA 11
 ### Using `uv` (recommended)
 
 ```bash
-[git clone https://github.com/<user>/PRISM.git](https://github.com/alhqlearn/PRISM.git)
+https://github.com/alhqlearn/PRISM.git
 cd PRISM
 uv venv ~/spp_ahq                       # named to match the SLURM scripts
 source ~/spp_ahq/bin/activate
@@ -116,7 +116,9 @@ GPU is strongly recommended: training a single mode (`1H` *or* `13C`) takes roug
 
 ## Data & checkpoints
 
-The curated NMR dataset (`df_C_H_merged_NMR_unique.csv`) and all pre-trained checkpoints (`mol2spec/checkpoints/nmr_1h/best.pt`, `mol2spec/checkpoints/nmr_13c/best.pt`, and the `spect2mol/checkpoints/` directory including the top-K ensemble manifest) are released through **Zenodo** under the same DOI as the paper.
+The curated NMR dataset (`df_C_H_merged_NMR_unique.csv`) and all pre-trained checkpoints (`mol2spec/checkpoints/nmr_1h/best.pt`, `mol2spec/checkpoints/nmr_13c/best.pt`, and the `spect2mol/checkpoints/` directory including the top-K ensemble manifest) are released through **https://doi.org/10.5281/zenodo.20271514** under the same DOI as the paper.
+
+This collection comprises the complete set of trained model weights and curated NMR datasets used in the study. The molecular structure-to-spectrum prediction models are provided as mol2spec_C13_best.pt (262.65 MB) and mol2spec_H1_best.pt (263.83 MB), corresponding to the ¹³C and ¹H NMR prediction tasks respectively, while the inverse spectrum-to-structure model is supplied as spec2mol_best.pt (649.81 MB). The underlying data is contained in df_C_H_merged_NMR_unique.csv (1.30 GB), a unique-entry table merging ¹H and ¹³C chemical shift assignments, which is partitioned into the standard train.csv (1.04 GB), val.csv, and test.csv (129.56 MB) splits used for model training, validation, and evaluation.
 
 After downloading, place files as follows:
 
@@ -127,8 +129,6 @@ mol2spec/
     checkpoints/nmr_13c/best.pt
 spect2mol/
     checkpoints/best.pt
-    checkpoints/top_k_manifest.json
-    checkpoints/top_k_ep*.pt
 ```
 
 Each CSV row contains a canonical SMILES, a `¹H` peak list, and a `¹³C` peak list, both in the bracketed-tuple format described below.
