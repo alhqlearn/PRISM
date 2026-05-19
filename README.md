@@ -77,7 +77,7 @@ PRISM/
 
 ## Installation
 
-PRISM is developed against **Python 3.10+** and **PyTorch ≥ 2.1** with CUDA 11.8 / 12.x. We recommend [`uv`](https://github.com/astral-sh/uv) for environment management; `venv` + `pip` also works.
+PRISM is developed against **Python 3.10+** and **PyTorch ≥ 2.1** with CUDA 11.8 / 12.x. We recommend [`uv`](https://github.com/astral-sh/uv) for environment management; `venv` + `pip` also works. This process takes near about 30 minutes.
 
 ### Using `uv` (recommended)
 
@@ -286,15 +286,15 @@ A full reproduction involves four jobs:
 
 ```bash
 # Forward direction
-sbatch mol2spec/run_1h.sh        # ≈ 7 h
-sbatch mol2spec/run_13c.sh       # ≈ 8 h
+sbatch mol2spec/run_1h.sh        # ≈ 12 h
+sbatch mol2spec/run_13c.sh       # ≈ 12 h
 
 # Inverse direction
-sbatch spect2mol/script_train.sh # ≈ 12 h
+sbatch spect2mol/script_train.sh # ≈ 15 h
 sbatch spect2mol/script_test.sh
 ```
 
-All randomness is controlled by `seed: 42` in each config. The reference numbers in the paper were obtained with `--precision bf16` (or `fp32` for `mol2spec`), `batch_size=128`, and 50 epochs.
+All randomness is controlled by `seed: 42` in each config. The reference numbers in the paper were obtained with `--precision bf16` (or `fp32` for `mol2spec`), `batch_size=128`, and 50 epochs. Expected runtime for individual jobs training in A40 Gpu cards is 12-15 hours. 
 
 ---
 
