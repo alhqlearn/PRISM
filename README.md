@@ -12,8 +12,12 @@ PRISM is a paired pair of transformer models for the two ends of small-molecule 
 Both models are trained on the same in-house curated NMR corpus and share a tokenizer / vocabulary convention, so the predicted spectra from `mol2spec` can be fed directly into `spect2mol` for round-trip validation.
 
 > 📄 *Paper:* **From spectra to structure and back: PRISM, a bidirectional NMR foundation model**
+
 > 🧪 *Pre-trained checkpoints & training data:* **https://doi.org/10.5281/zenodo.20271514**
+
 > 💻 *Code:* this repository
+
+> 🌐 *Website:* **https://prism.uni-muenster.de/**
 
 ---
 
