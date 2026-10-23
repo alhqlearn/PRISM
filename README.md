@@ -13,7 +13,7 @@ Both models are trained on the same in-house curated NMR corpus and share a toke
 
 > 📄 *Paper:* **From spectra to structure and back: PRISM, a bidirectional NMR foundation model**
 
-> 🧪 *Pre-trained checkpoints & training data:* **https://doi.org/10.5281/zenodo.20271514**
+> 🧪 *Pre-trained checkpoints & training data:* **https://doi.org/10.5281/zenodo.23600371**
 
 > 💻 *Code:* this repository
 
