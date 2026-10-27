@@ -306,8 +306,19 @@ All randomness is controlled by `seed: 42` in each config. The reference numbers
 
 If PRISM is useful in your work, please cite:
 
-```bibtex
+A. Hoque, F. Glorius, PRISM, a Bidirectional NMR Foundation Model: From Peak List to Structure and Back, Angew. Chem. Int. Ed. 2026, e7185622. doi:10.1002/anie.7185622
 
+```bibtex
+@article{hoque2026prism,
+  author  = {Hoque, Ajnabiul and Glorius, Frank},
+  title   = {{PRISM}, a Bidirectional {NMR} Foundation Model:
+             From Peak List to Structure and Back},
+  journal = {Angew. Chem. Int. Ed.},
+  year    = {2026},
+  pages   = {e7185622},
+  doi     = {10.1002/anie.7185622},
+  url     = {https://doi.org/10.1002/anie.7185622}
+}
 ```
 
 and the Zenodo deposit for the data + checkpoints:
